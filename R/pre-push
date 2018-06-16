@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+## Don't run tests if just pushing tags
+while read -d $'\0' arg; do
+    if [[ "$arg" == '--tags' ]]; then
+        exit 0
+    fi
+done </proc/$PPID/cmdline
+[ -x ./run_tests.sh ] && ./run_tests.sh
+[ -x ./run_tests.R ] && ./run_tests.R
+
+# Build package
+Rscript -e "devtools::install()"

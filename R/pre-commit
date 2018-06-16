@@ -1,0 +1,4 @@
+#!/usr/bin/env Rscript
+
+devtools::document()
+system("git add man/*.Rd")

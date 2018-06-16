@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+## Don't run tests if just pushing tags
+while read -d $'\0' arg ; do
+    if [[ "$arg" == '--tags' ]] ; then
+        exit 0
+    fi
+done < /proc/$PPID/cmdline
+./run_tests.sh
